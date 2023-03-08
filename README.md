@@ -1,6 +1,21 @@
 # Visidon_Image_Translation_Test
 
 
+## Abstract
+
+This projects performs end-to-end image transformation using deep neural networks.
+The architecture of the model is a 2D autoencoder, where the encoder and decoder are implemented using the ResNet18-like architecture.
+The network model is implemented based on existing resources from the Internet.
+Currently, there are many public repositories that implement 2D encoder-decoder architectures, I adopted the one from: ```https://github.com/julianstastny/VAE-ResNet18-PyTorch/blob/master/model.py.```
+The loss function used to supervise the modeling training is the ```squared L2 norm```.
+
+The performance of the current implementation is not ideal, because the transformed images are a bit blurry, but the targeted image
+should be more sharp. I am planning to use ```L1 norm``` as the loss function in the next step.
+
+
+
+
+
 ## Getting Started
 
 ### Environment 
@@ -42,3 +57,4 @@ The inference file ```inference.py``` will randomly choose, process, and display
 python inference.py
 ```
 
+Result visualization is interactive, after clicking on the image, a new image will be processed and displayed.
