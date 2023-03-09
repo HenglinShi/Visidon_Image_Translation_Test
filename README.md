@@ -14,7 +14,7 @@ The performance of the current implementation is not ideal, because the transfor
 targeted image
 should be more sharp. I am planning to use ```L1 norm``` as the loss function in the next step.
 
-Simplying to see the result please refer to [\[inference.ipynb\]](inference.py)
+Simplying to see the result please refer to [\[Inference.ipynb\]](Inference.ipynb)
 
 ## Getting Started
 
