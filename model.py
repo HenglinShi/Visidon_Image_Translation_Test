@@ -59,7 +59,6 @@ class BasicBlockDec(nn.Module):
 
         self.conv2 = nn.Conv2d(in_planes, in_planes, kernel_size=3, stride=1, padding=1, bias=False)
         self.bn2 = nn.BatchNorm2d(in_planes)
-        # self.bn1 could have been placed here, but that messes up the order of the layers when printing the class
 
         if stride == 1:
             self.conv1 = nn.Conv2d(in_planes, planes, kernel_size=3, stride=1, padding=1, bias=False)
@@ -93,7 +92,6 @@ class ResNet18Enc(nn.Module):
         self.layer2 = self._make_layer(BasicBlockEnc, 128, num_Blocks[1], stride=2)
         self.layer3 = self._make_layer(BasicBlockEnc, 256, num_Blocks[2], stride=2)
         self.layer4 = self._make_layer(BasicBlockEnc, 512, num_Blocks[3], stride=2)
-        # self.linear = nn.Linear(512, 2 * z_dim)
 
     def _make_layer(self, BasicBlockEnc, planes, num_Blocks, stride):
         strides = [stride] + [1] * (num_Blocks - 1)
@@ -109,12 +107,7 @@ class ResNet18Enc(nn.Module):
         x = self.layer2(x)
         x = self.layer3(x)
         x = self.layer4(x)
-        #x = F.adaptive_avg_pool2d(x, 1)
-        # x = x.view(x.size(0), -1)
-        # x = self.linear(x)
-        # mu = x[:, :self.z_dim]
-        # logvar = x[:, self.z_dim:]
-        return x  # mu, logvar
+        return x
 
 
 class ResNet18Dec(nn.Module):
@@ -141,9 +134,6 @@ class ResNet18Dec(nn.Module):
         return nn.Sequential(*layers)
 
     def forward(self, z):
-        # x = self.linear(z)
-        # x = x.view(z.size(0), 512, 1, 1)
-        #x = F.interpolate(z, scale_factor=32)
         x = self.layer4(z)
         x = self.layer3(x)
         x = self.layer2(x)
